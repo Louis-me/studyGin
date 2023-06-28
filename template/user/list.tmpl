@@ -1,0 +1,16 @@
+<html>
+    <head>
+        <title>用户列表</title>
+    </head>
+    <body>
+    <div>
+        <p>列表数据：</p>
+            <!-- 定义一个 结构体切片 -->
+            {{ $userList := . }}
+
+            {{ range $index,$v := $userList.users }}
+                <p>{{ $index }}--{{ $v.Name }}--{{ $v.Password }}</p>
+            {{ end }}
+        </div>
+	</body>
+</html>
