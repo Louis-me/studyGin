@@ -9,7 +9,7 @@
             {{ $userList := . }}
 
             {{ range $index,$v := $userList.users }}
-                <p>{{ $index }}--{{ $v.Name }}--{{ $v.Password }}</p>
+                <p>{{ $index }}--{{ $v.Id }}--{{ $v.Name }}--{{ $v.Password }}</p>
             {{ end }}
         </div>
 	</body>

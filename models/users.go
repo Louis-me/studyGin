@@ -33,6 +33,17 @@ func (u *User) UserList() (users []User, err error) {
 
 }
 
+// 获取用户列表
+func (u *User) UserGet() (users []User, err error) {
+	database.Db.Where("id=?", u.Id).Find(&users)
+	if len(users) == 0 {
+		fmt.Println("user is not exists")
+		return
+	}
+	return
+
+}
+
 // 新增用户
 func (u *User) UserAdd() (id int, err error) {
 	result := database.Db.Create(&u)

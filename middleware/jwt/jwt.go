@@ -14,8 +14,8 @@ import (
 
 // JWTAuth 中间件，检查token
 func JWTAuth() gin.HandlerFunc {
-	fmt.Println("------shikun---")
 	return func(c *gin.Context) {
+		// //获取到请求头中的token
 		token := c.Request.Header.Get("token")
 		if token == "" {
 			c.JSON(http.StatusOK, gin.H{
@@ -72,7 +72,7 @@ type CustomClaims struct {
 	ID       int    `json:"userId"`
 	Name     string `json:"name"`
 	Password string `json:"password"`
-	jwt.RegisteredClaims
+	jwt.RegisteredClaims // 设置过期时间
 }
 
 // 新建一个jwt实例

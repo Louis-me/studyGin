@@ -19,6 +19,7 @@ func InitRouter() *gin.Engine {
 	router.POST("/AddNewUser", jwt.JWTAuth(), apis.AddNewUser)
 	router.POST("/DelUser", jwt.JWTAuth(), apis.DelUser)
 	router.POST("/EditUser", jwt.JWTAuth(), apis.EditUser)
+	router.GET("/UserGet/:id", jwt.JWTAuth(), apis.GetUser)
 
 	return router
 

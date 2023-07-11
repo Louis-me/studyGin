@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"strconv"
 	"time"
 
 	"example.com/myGin/middleware/jwt"
@@ -162,6 +163,34 @@ func EditUser(c *gin.Context) {
 			c.JSON(http.StatusOK, gin.H{
 				"msg":  "更新用户成功",
 				"code": 0,
+			})
+		}
+	} else {
+		c.JSON(400, gin.H{"JSON=== status": "binding JSON error!"})
+	}
+
+}
+
+func GetUser(c *gin.Context) {
+	id := c.Param("id")
+	ids, _ := strconv.Atoi(id)
+
+	u := models.User{
+		Id: ids,
+	}
+	if c.Bind(&u) == nil { //把客户端格式传过来的数据绑定到结构体user中去
+		us, err := u.UserGet() // 调用model层的方法
+		if err != nil {
+			c.JSON(http.StatusOK, gin.H{
+				"msg":   "查询失败",
+				"code":  -1,
+				"users": "",
+			})
+		} else {
+			c.JSON(http.StatusOK, gin.H{
+				"msg":   "查询用户成功",
+				"code":  0,
+				"users": us,
 			})
 		}
 	} else {
